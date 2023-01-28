@@ -130,8 +130,8 @@ function App () {
               Create New Cards
             </Button>{' '}
             <Button variant='contained' component='label'>
-              Upload File
-              <input type='file' hidden onChange={uploadFile} />
+              Upload Files
+              <input type='file' hidden multiple onChange={uploadFile} />
             </Button>
           </div></FadeIn>
         )}
