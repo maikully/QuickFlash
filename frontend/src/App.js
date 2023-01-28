@@ -16,6 +16,16 @@ function App () {
   const [inputValue, setInputValue] = useState('')
   const [flashCards, setFlashCards] = useState([])
   const [mode, setMode] = useState(0)
+  const [downloadData, setDownloadData] = useState(false)
+
+
+
+  function saveData(){
+    const json=JSON.stringify(flashCards);
+    const blob=new Blob([json],{type:'application/json'})
+    const href = URL.createObjectURL(blob);
+  }
+
   const handleSubmit = async e => {
     const data = new FormData()
     data.append('text', inputValue)

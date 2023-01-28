@@ -23,11 +23,30 @@ function CardDisplay (props) {
     let newFlipped = flipped.filter((x, i) => i !== idx)
     setFlipped(newFlipped)
     setCards(cards.filter((x, i) => i !== idx))
-    checkstuff()
   }
-  const checkstuff = () => {
-    console.log(flipped)
+
+  const showQuestions = async e => {
+    setFlipped(props.cards.map(x => false))
   }
+
+  const showAnswers = async e => {
+    setFlipped(props.cards.map(x => true))
+  }
+
+  const downloadFile = async => {
+    const json=JSON.stringify(cards);
+    const blob=new Blob([json],{type:'application/json'})
+    const link = document.createElement('a');
+
+    link.href = URL.createObjectURL(blob);
+    link.download = 'quickflash_save_'+ new Date()+'.json';
+
+    document.body.appendChild(link);
+    link.click();
+
+    document.body.removeChild(link);
+  }
+
   return (
     <div
       className='App'
@@ -39,6 +58,56 @@ function CardDisplay (props) {
         width: '60vw'
       }}
     >
+
+    <div>
+        <Button
+          variant='contained'
+          style={{
+            backgroundColor: 'gray',
+            marginLeft: 'auto',
+            marginBottom: '5vh'
+          }}
+          onClick={showQuestions}>
+          Show Questions
+        </Button>
+        <Button
+          variant='contained'
+          style={{
+            backgroundColor: 'gray',
+            marginLeft: 'auto',
+            marginBottom: '5vh'
+          }}
+          onClick={showAnswers}>
+          Show Answers
+        </Button>
+        <Button
+          href={`data:text/json;charset=utf-8,${encodeURIComponent(
+              JSON.stringify(cards)
+            )}`}
+          variant='contained'
+          style={{
+            backgroundColor: 'gray',
+            marginLeft: 'auto',
+            marginBottom: '5vh'
+          }}
+          download="quickflash_save_.json">
+          Download Cards
+        </Button>
+        <Button
+          variant='contained'
+          style={{
+            backgroundColor: 'gray',
+            marginLeft: 'auto',
+            marginBottom: '5vh'
+          }}
+          onClick={downloadFile}>
+          Download Cards 2
+        </Button>
+
+          <br></br>
+      </div>
+
+
       {cards.map((x, idx) => (
         <div
           key={idx}
