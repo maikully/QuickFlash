@@ -2,19 +2,24 @@ from flask import Flask
 from flask import request
 import json
 import raketest
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route("/")
 def hello_world():
     return "<p>Hello, World!</p>"
 
 @app.route("/generate", methods = ['GET', 'POST'])
+@cross_origin()
 def generate_original_flashcards():
     if request.method == 'POST':
         text_block = request.form['text']
     else:
         text_block = request.args.get("text")
+    print(text_block)
     flashcard_list = raketest.make_flashcards(text_block)
     jsoner = jsonify_flashcard_list(flashcard_list)
     response = app.response_class(
