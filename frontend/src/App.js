@@ -5,7 +5,7 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import { styled } from '@mui/material/styles'
-import { Button, TextField } from '@mui/material'
+import { Button, TextField, Typography } from '@mui/material'
 import { useState } from 'react'
 
 function App () {
@@ -25,9 +25,9 @@ function App () {
   return (
     <div className='App'>
       <header className='App-header'>
-        <p>
-          <code>Welcome to QuickFlash!</code>
-        </p>
+        <Typography variant='h4' component='h3' style={{marginBottom:"5vh"}}>
+          Welcome to QuickFlash!
+        </Typography>
         <div style={{ display: 'flex', flexWrap: 'wrap', width: '50vw' }}>
           <TextField
             InputLabelProps={{
