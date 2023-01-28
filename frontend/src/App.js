@@ -20,12 +20,10 @@ function App () {
   const [downloadData, setDownloadData] = useState(false)
   const [logoFlip, setLogoFlip] = useState(false)
 
-
-
-  function saveData(){
-    const json=JSON.stringify(flashCards);
-    const blob=new Blob([json],{type:'application/json'})
-    const href = URL.createObjectURL(blob);
+  function saveData () {
+    const json = JSON.stringify(flashCards)
+    const blob = new Blob([json], { type: 'application/json' })
+    const href = URL.createObjectURL(blob)
   }
 
   const handleSubmit = async e => {
@@ -36,9 +34,9 @@ function App () {
       body: data
     })
     let res = await response.json()
-    if (response.status != 200){
+    if (response.status != 200) {
       alert(res.message)
-    } else{
+    } else {
       res.forEach(e => setFlashCards(flashCards => [...flashCards, e]))
       if (res.length > 0) {
         setMode(2)
@@ -57,24 +55,22 @@ function App () {
     setFlashCards([])
   }
 
-  const uploadFile = async (e) => {
-    const files = e.target.files;
+  const uploadFile = async e => {
+    const files = e.target.files
     if (files != null) {
-      const data = new FormData();
-      for (let i = 0 ; i < files.length ; i++) {
-        data.append("files", files[i]);
+      const data = new FormData()
+      for (let i = 0; i < files.length; i++) {
+        data.append('files', files[i])
       }
 
-      let response = await fetch('http://127.0.0.1:5000/jsonupload',
-        {
-          method: 'post',
-          body: data,
-        }
-      );
-      let res = await response.json();
-      if (response.status != 200){
+      let response = await fetch('http://127.0.0.1:5000/jsonupload', {
+        method: 'post',
+        body: data
+      })
+      let res = await response.json()
+      if (response.status != 200) {
         alert(res.message)
-      } else{
+      } else {
         res.forEach(e => setFlashCards(flashCards => [...flashCards, e]))
         if (res.length > 0) {
           setMode(2)
@@ -87,7 +83,7 @@ function App () {
     <div className='App'>
       <header className='App-header'>
         <FadeIn>
-        <ReactCardFlip isFlipped={logoFlip} flipDirection='vertical'>
+          <ReactCardFlip isFlipped={logoFlip} flipDirection='vertical'>
             <Button
               onClick={() => {
                 setLogoFlip(true)
@@ -97,11 +93,14 @@ function App () {
                 background: '#c7b299',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center',
-                marginBottom: '5vh'
+                justifyContent: 'center'
               }}
             >
-              <img src="QuickFlashLogo.png" alt="QuickFlashLogo" width="500px"></img>
+              <img
+                src='QuickFlashLogo.png'
+                alt='QuickFlashLogo'
+                width='500px'
+              ></img>
             </Button>
 
             <Button
@@ -117,50 +116,60 @@ function App () {
                 marginBottom: '5vh'
               }}
             >
-              <img src="QuickFlashLogo2.png" alt="QuickFlashLogo" width="500px"></img>
+              <img
+                src='QuickFlashLogo2.png'
+                alt='QuickFlashLogo'
+                width='500px'
+              ></img>
             </Button>
-          </ReactCardFlip></FadeIn>
+          </ReactCardFlip>
+        </FadeIn>
+      </header>
+      <header className='App-body'>
         {mode === 0 && (
-        <FadeIn>
-          <div>
-            <Button
-              variant='contained'
-              onClick={() => {
-                setMode(1)
-              }}
-            >
-              Create New Cards
-            </Button>{' '}
-            <Button variant='contained' component='label'>
-              Upload Files
-              <input type='file' hidden multiple onChange={uploadFile} />
-            </Button>
-          </div></FadeIn>
+          <FadeIn>
+            <div>
+              <Button
+                variant='contained'
+                onClick={() => {
+                  setMode(1)
+                }}
+              >
+                Create New Cards
+              </Button>{' '}
+              <Button variant='contained' component='label'>
+                Upload Files
+                <input type='file' hidden multiple onChange={uploadFile} />
+              </Button>
+            </div>
+          </FadeIn>
         )}
-        {mode === 1 && (<FadeIn>
-          <div style={{ display: 'flex', flexWrap: 'wrap', width: '50vw' }}>
-            <TextField
-              InputLabelProps={{
-                style: {
-                  color: 'black'
-                }
-              }}
-              label='Enter information to flashify!'
-              multiline
-              rows={10}
-              variant='outlined'
-              onChange={handleChange}
-              style={{ flexGrow: 1 }}
-            />
-            <div className='break'></div>
-            <Button
-              variant='contained'
-              style={{ backgroundColor: 'black', marginLeft: 'auto' }}
-              onClick={handleSubmit}
-            >
-              Submit
-            </Button>
-          </div></FadeIn>
+        {mode === 1 && (
+          <FadeIn>
+            <div style={{ display: 'flex', flexWrap: 'wrap', width: '50vw' }}>
+              <TextField
+                InputLabelProps={{
+                  style: {
+                    color: 'black'
+                  }
+                }}
+                label='Enter information to flashify!'
+                multiline
+                rows={10}
+                variant='outlined'
+                onChange={handleChange}
+                style={{ flexGrow: 1 }}
+              />
+              <div className='break'></div>
+              <Button
+                variant='contained'
+                style={{ backgroundColor: 'black', marginLeft: 'auto' }}
+                onClick={handleSubmit}
+              >
+                Submit
+              </Button>
+            </div>
+          </FadeIn>
         )}
         <br></br>
         {mode === 2 && (
