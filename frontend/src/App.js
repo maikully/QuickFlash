@@ -57,6 +57,7 @@ function App () {
             Submit
           </Button>
         </div>
+        <br></br>
         {flashCards.length > 0 && <CardDisplay cards={flashCards} />}
       </header>
     </div>

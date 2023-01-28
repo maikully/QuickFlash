@@ -19,7 +19,7 @@ function CardDisplay (props) {
   const [flipped, setFlipped] = useState(x)
   console.log(flipped)
   return (
-    <div className='App'  style={{ display: 'flex', flexDirection:"row", justifyContent: "space-between", flexWrap: 'wrap', width:"50vw" }}>
+    <div className='App'  style={{ display: 'flex', flexDirection:"row", justifyContent: "space-between", flexWrap: 'wrap', width:"60vw" }}>
       {props.cards.map((x, idx) => (
         <>
           <ReactCardFlip
@@ -44,7 +44,8 @@ function CardDisplay (props) {
                 background: 'white',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                marginBottom:"5vh"
               }}
             >
               <div>
