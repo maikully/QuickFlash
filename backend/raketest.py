@@ -18,10 +18,11 @@ single_word_raker = Rake(min_length=1, max_length=1)
 
 
 class Flashcard:
-    def __init__(self, sentence, keyword, flashcard_text):
+    def __init__(self, sentence, keyword, flashcard_text, answered_question):
         self.sentence = sentence
         self.keyword = keyword
         self.flashcard_text = flashcard_text
+        self.answered_question = answered_question
 
 def make_flashcards(paragraph:str):
     flashcard_list = list()
@@ -32,8 +33,8 @@ def make_flashcards(paragraph:str):
         keyword = get_most_reasonable_phrase(sentence)
         if (i != len(sentences) - 1):
             sentence = sentence+"."
-        keyword, flashcard_text = get_flashcard_text(sentence, keyword)
-        flashcard = Flashcard(sentence, keyword, flashcard_text)
+        keyword, flashcard_text, answered_question = get_flashcard_text(sentence, keyword)
+        flashcard = Flashcard(sentence, keyword, flashcard_text, answered_question)
         flashcard_list.append(flashcard)
     return(flashcard_list)
 
@@ -57,7 +58,7 @@ def detect_puntuation(string):
 
 def get_flashcard_text(sentence, keyword):
     if keyword in sentence:
-        return keyword, sentence.replace(keyword, '________', 1)
+        return keyword, sentence.replace(keyword, '________', 1), sentence.replace(keyword, "{"+keyword+"}", 1)
     if keyword.lower() in sentence.lower():
         start = sentence.lower().index(keyword.lower())
         keyword = sentence[start:start+len(keyword)]
