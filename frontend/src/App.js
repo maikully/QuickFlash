@@ -23,8 +23,14 @@ function App () {
       body: data
     })
     let res = await response.json()
-    res.forEach(e => setFlashCards(flashCards => [...flashCards, e]))
-    console.log(res)
+    if (response.status != 200){
+      alert(res.message)
+    } else{
+      res.forEach(e => setFlashCards(flashCards => [...flashCards, e]))
+      if (res.length > 0) {
+        setMode(2)
+      }
+    }
   }
   const handleBack = async e => {
     handleReset()
@@ -55,6 +61,9 @@ function App () {
         alert(res.message)
       } else{
         res.forEach(e => setFlashCards(flashCards => [...flashCards, e]))
+        if (res.length > 0) {
+          setMode(2)
+        }
       }
     }
   }
