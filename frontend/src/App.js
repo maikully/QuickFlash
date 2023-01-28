@@ -94,7 +94,7 @@ function App () {
               }}
               style={{
                 textTransform: 'none',
-                background: '#6dcff6',
+                background: '#c7b299',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
@@ -110,7 +110,7 @@ function App () {
               }}
               style={{
                 textTransform: 'none',
-                background: '#6dcff6',
+                background: '#c7b299',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
