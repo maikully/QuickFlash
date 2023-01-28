@@ -9,7 +9,8 @@ import { styled } from '@mui/material/styles'
 import { Button, TextField, Typography } from '@mui/material'
 import { useState } from 'react'
 import { responsiveProperty } from '@mui/material/styles/cssUtils'
-import FadeIn from 'react-fade-in';
+import FadeIn from 'react-fade-in'
+import ReactCardFlip from 'react-card-flip'
 
 function App () {
   const url = 'http://127.0.0.1:5000/generate'
@@ -17,6 +18,7 @@ function App () {
   const [flashCards, setFlashCards] = useState([])
   const [mode, setMode] = useState(0)
   const [downloadData, setDownloadData] = useState(false)
+  const [logoFlip, setLogoFlip] = useState(false)
 
 
 
@@ -83,13 +85,39 @@ function App () {
     <div className='App'>
       <header className='App-header'>
         <FadeIn>
-        <Typography
-          variant='h4'
-          component='h3'
-          style={{ marginBottom: '5vh', marginTop: '5vh' }}
-        >
-          Welcome to QuickFlash!
-        </Typography></FadeIn>
+        <ReactCardFlip isFlipped={logoFlip} flipDirection='vertical'>
+            <Button
+              onClick={() => {
+                setLogoFlip(true)
+              }}
+              style={{
+                textTransform: 'none',
+                background: '#6dcff6',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                marginBottom: '5vh'
+              }}
+            >
+              <img src="QuickFlashLogo.png" alt="QuickFlashLogo" width="500px"></img>
+            </Button>
+
+            <Button
+              onClick={() => {
+                setLogoFlip(false)
+              }}
+              style={{
+                textTransform: 'none',
+                background: '#6dcff6',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                marginBottom: '5vh'
+              }}
+            >
+              <img src="QuickFlashLogo2.png" alt="QuickFlashLogo" width="500px"></img>
+            </Button>
+          </ReactCardFlip></FadeIn>
         {mode === 0 && (
         <FadeIn>
           <div>

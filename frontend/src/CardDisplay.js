@@ -39,7 +39,9 @@ function CardDisplay (props) {
     const link = document.createElement('a');
 
     link.href = URL.createObjectURL(blob);
-    link.download = 'quickflash_save_'+ new Date()+'.json';
+    let rightNow = new Date()
+    rightNow = rightNow.toString()
+    link.download = 'quickflash_save_'+ rightNow.substring(0,rightNow.indexOf("(") - 1)+'.json';
 
     document.body.appendChild(link);
     link.click();
@@ -53,13 +55,13 @@ function CardDisplay (props) {
       style={{
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         flexWrap: 'wrap',
         width: '60vw'
       }}
-    >
+    >   
 
-    <div>
+    <div style={{justifyContent:"center"}}>
         <Button
           variant='contained'
           style={{
@@ -69,7 +71,7 @@ function CardDisplay (props) {
           }}
           onClick={showQuestions}>
           Show Questions
-        </Button>
+        </Button>{' '}
         <Button
           variant='contained'
           style={{
@@ -79,20 +81,7 @@ function CardDisplay (props) {
           }}
           onClick={showAnswers}>
           Show Answers
-        </Button>
-        <Button
-          href={`data:text/json;charset=utf-8,${encodeURIComponent(
-              JSON.stringify(cards)
-            )}`}
-          variant='contained'
-          style={{
-            backgroundColor: 'gray',
-            marginLeft: 'auto',
-            marginBottom: '5vh'
-          }}
-          download="quickflash_save_.json">
-          Download Cards
-        </Button>
+        </Button>{' '}
         <Button
           variant='contained'
           style={{
@@ -101,11 +90,13 @@ function CardDisplay (props) {
             marginBottom: '5vh'
           }}
           onClick={downloadFile}>
-          Download Cards 2
+          Download Cards
         </Button>
 
           <br></br>
       </div>
+
+      <div className='break'></div>
 
 
       {cards.map((x, idx) => (
@@ -144,6 +135,7 @@ function CardDisplay (props) {
               style={{
                 minWidth: 275,
                 maxWidth: 300,
+                minHeight: 300,
                 textTransform: 'none',
                 background: 'white',
                 display: 'flex',
@@ -192,11 +184,13 @@ function CardDisplay (props) {
               style={{
                 minWidth: 275,
                 maxWidth: 300,
+                minHeight: 300,
                 textTransform: 'none',
                 background: 'white',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                marginBottom: '5vh'
               }}
             >
               <Typography
@@ -212,13 +206,13 @@ function CardDisplay (props) {
               >
                 {x.answered_question.substring(
                   0,
-                  x.answered_question.indexOf('{')
+                  x.answered_question.indexOf('{{')
                 )}
                 <b>
                   <mark>{x.answer}</mark>
                 </b>
                 {x.answered_question.substring(
-                  x.answered_question.indexOf('}') + 2,
+                  x.answered_question.indexOf('}}') + 2,
                   x.answered_question.length
                 )}
               </Typography>
