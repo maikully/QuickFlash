@@ -1,2 +1,3 @@
-# HackBrown2023
-HackBrown2023
+# QuickFlash
+
+Quickly generate flashcards from your notes!
