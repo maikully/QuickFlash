@@ -21,7 +21,7 @@ function CardDisplay (props) {
   return (
     <div className='App'  style={{ display: 'flex', flexDirection:"row", justifyContent: "space-between", flexWrap: 'wrap', width:"60vw" }}>
       {props.cards.map((x, idx) => (
-        <>
+        <div key = {idx}>
           <ReactCardFlip
             isFlipped={flipped[idx]}
             flipDirection='vertical'
@@ -115,7 +115,7 @@ function CardDisplay (props) {
             </Button>
           </ReactCardFlip>
           <br></br>
-        </>
+        </div>
       ))}
     </div>
   )
