@@ -32,6 +32,25 @@ function App () {
     setInputValue("")
     setFlashCards([])
   }
+
+  const uploadFile = async (e) => {
+    const file = e.target.files[0];
+    if (file != null) {
+      const data = new FormData();
+      data.append('file', file);
+
+      let response = await fetch('http://127.0.0.1:5000/jsonupload',
+        {
+          method: 'post',
+          body: data,
+        }
+      );
+      let res = await response.json();
+      res.forEach(e => setFlashCards(flashCards => [...flashCards, e]))
+    }
+  }
+
+
   return (
     <div className='App'>
       <header className='App-header'>
@@ -77,6 +96,14 @@ function App () {
               Back
             </Button></div>}
       </header>
+
+      <form>
+        <input
+          type="file"
+          onChange={uploadFile}>
+        </input>
+      </form>
+
     </div>
   )
 }
