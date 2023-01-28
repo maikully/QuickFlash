@@ -9,6 +9,7 @@ import { styled } from '@mui/material/styles'
 import { Button, TextField, Typography } from '@mui/material'
 import { useState } from 'react'
 import { responsiveProperty } from '@mui/material/styles/cssUtils'
+import FadeIn from 'react-fade-in';
 
 function App () {
   const url = 'http://127.0.0.1:5000/generate'
@@ -71,14 +72,16 @@ function App () {
   return (
     <div className='App'>
       <header className='App-header'>
+        <FadeIn>
         <Typography
           variant='h4'
           component='h3'
           style={{ marginBottom: '5vh', marginTop: '5vh' }}
         >
           Welcome to QuickFlash!
-        </Typography>
+        </Typography></FadeIn>
         {mode === 0 && (
+        <FadeIn>
           <div>
             <Button
               variant='contained'
@@ -92,9 +95,9 @@ function App () {
               Upload File
               <input type='file' hidden onChange={uploadFile} />
             </Button>
-          </div>
+          </div></FadeIn>
         )}
-        {mode === 1 && (
+        {mode === 1 && (<FadeIn>
           <div style={{ display: 'flex', flexWrap: 'wrap', width: '50vw' }}>
             <TextField
               InputLabelProps={{
@@ -117,7 +120,7 @@ function App () {
             >
               Submit
             </Button>
-          </div>
+          </div></FadeIn>
         )}
         <br></br>
         {mode === 2 && (

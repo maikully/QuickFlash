@@ -14,18 +14,53 @@ import {
 } from '@mui/material'
 import { useState } from 'react'
 import ReactCardFlip from 'react-card-flip'
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline'
 function CardDisplay (props) {
   let x = props.cards.map(x => false)
   const [flipped, setFlipped] = useState(x)
-  console.log(flipped)
+  const [cards, setCards] = useState(props.cards)
+  const handleDelete = idx => {
+    let newFlipped = flipped.filter((x, i) => i !== idx)
+    setFlipped(newFlipped)
+    setCards(cards.filter((x, i) => i !== idx))
+    checkstuff()
+  }
+  const checkstuff = () => {
+    console.log(flipped)
+  }
   return (
-    <div className='App'  style={{ display: 'flex', flexDirection:"row", justifyContent: "space-between", flexWrap: 'wrap', width:"60vw" }}>
-      {props.cards.map((x, idx) => (
-        <div key = {idx}>
-          <ReactCardFlip
-            isFlipped={flipped[idx]}
-            flipDirection='vertical'
+    <div
+      className='App'
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        width: '60vw'
+      }}
+    >
+      {cards.map((x, idx) => (
+        <div
+          key={idx}
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center'
+          }}
+        >
+          <button
+            style={{
+              height: '30px',
+              width: '30px',
+              backgroundColor: 'darksalmon',
+              padding: 0,
+              border: 'none',
+            }}
+            onClick={() => handleDelete(idx)}
           >
+            <RemoveCircleOutlineIcon></RemoveCircleOutlineIcon>
+          </button>
+          <ReactCardFlip isFlipped={flipped[idx]} flipDirection='vertical'>
             <Button
               onClick={() => {
                 const newFlipped = flipped.map((x, i) => {
@@ -45,16 +80,22 @@ function CardDisplay (props) {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                marginBottom:"5vh"
+                marginBottom: '5vh'
               }}
             >
-              <div>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'end'
+                }}
+              >
                 <Typography
                   sx={{ fontSize: 14 }}
                   color='text.secondary'
                   gutterBottom
                 >
-                  Question
+                  Question{' '}
                 </Typography>
               </div>
 
