@@ -25,11 +25,15 @@ class Flashcard:
 
 def make_flashcards(paragraph:str):
     flashcard_list = list()
-    sentences = paragraph.split(". ")
-    for sentence in sentences:
+    import re
+    purged = re.sub(".\[[0-9]*\]", ".", paragraph)
+    sentences = purged.split(". ")
+    for i, sentence in enumerate(sentences):
         keyword = get_most_reasonable_phrase(sentence)
-        keyword, flashcard_text = get_flashcard_text(sentence+".", keyword)
-        flashcard = Flashcard(sentence+".", keyword, flashcard_text)
+        if (i != len(sentences) - 1):
+            sentence = sentence+"."
+        keyword, flashcard_text = get_flashcard_text(sentence, keyword)
+        flashcard = Flashcard(sentence, keyword, flashcard_text)
         flashcard_list.append(flashcard)
     return(flashcard_list)
 
