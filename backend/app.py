@@ -51,35 +51,40 @@ def jsonify_flashcard_list(flashcard_list):
 
 @app.route("/jsonupload", methods = ['POST'])
 def generate_flashcards_from_json():
-    if 'file' not in request.files:
+    if 'files' not in request.files:
         response = app.response_class(
             response=json.dumps({"message": "File not in request."}),
             status=409,
             mimetype='application/json'
             )
         return response
-    file = request.files['file']
-    # If the user does not select a file, the browser submits an
-    # empty file without a filename.
-    if file.filename == '':
+
+    files = request.files.getlist("files")
+    net_jsons = list()
+    if files:
+        for file in files:
+            filename = generate_string(8) +".json"
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            f = open(UPLOAD_FOLDER + "/" + filename, encoding="utf8")
+            jsoner = json.load(f)
+            net_jsons.extend(jsoner)
+
+            for elem in net_jsons:
+                if not ("original" in elem and "answer" in elem and "question" in elem and "answered_question" in elem):
+                    response = app.response_class(
+                        response=json.dumps({"message": "Cannot interpret uploaded files."}),
+                        status=409,
+                        mimetype='application/json'
+                        )
+                    return response
+            
         response = app.response_class(
-            response=json.dumps({"message": "Filename is empty."}),
-            status=409,
-            mimetype='application/json'
-            )
-        return response
-    if file and (allowed_file(file.filename) or file.filename == "blob"):
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], "temp.json"))
-        f = open(UPLOAD_FOLDER + "/" + "temp.json")
-        jsoner = json.load(f)
-        print(jsoner)
-        response = app.response_class(
-            response=json.dumps(jsoner),
+            response=json.dumps(net_jsons),
             status=200,
             mimetype='application/json'
             )
         return response
+
     else:
         response = app.response_class(
             response=json.dumps({"message": "Unable to process file or file type."}),
@@ -87,6 +92,11 @@ def generate_flashcards_from_json():
             mimetype='application/json'
             )
         return response
+
+def generate_string(k):
+    import random
+    import string
+    return ''.join(random.choices(string.ascii_lowercase, k=k))
 
 def main():
     app.run(threaded=True, port=5000)

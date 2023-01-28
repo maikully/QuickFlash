@@ -58,10 +58,12 @@ function App () {
   }
 
   const uploadFile = async (e) => {
-    const file = e.target.files[0];
-    if (file != null) {
+    const files = e.target.files;
+    if (files != null) {
       const data = new FormData();
-      data.append('file', file);
+      for (let i = 0 ; i < files.length ; i++) {
+        data.append("files", files[i]);
+      }
 
       let response = await fetch('http://127.0.0.1:5000/jsonupload',
         {

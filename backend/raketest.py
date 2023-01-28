@@ -3,7 +3,7 @@ import nltk
 
 nltk.download('stopwords')
 nltk.download('punkt')
-punctuation = "!\"#$%&\'()*+,—-./:;<=>?@[\]^_`{|}~"
+punctuation = "!\"#$%&\'()*+,—-./:;<=>?@[\]^_`{|}~’”“"
 punctuation_set = set(i for i in punctuation)
 
 # Uses stopwords for english from NLTK, and all puntuation characters by
@@ -33,9 +33,10 @@ def make_flashcards(paragraph:str):
         keyword = get_most_reasonable_phrase(sentence)
         if (i != len(sentences) - 1):
             sentence = sentence+"."
-        keyword, flashcard_text, answered_question = get_flashcard_text(sentence, keyword)
-        flashcard = Flashcard(sentence, keyword, flashcard_text, answered_question)
-        flashcard_list.append(flashcard)
+        if (sentence):
+            keyword, flashcard_text, answered_question = get_flashcard_text(sentence, keyword)
+            flashcard = Flashcard(sentence, keyword, flashcard_text, answered_question)
+            flashcard_list.append(flashcard)
     return(flashcard_list)
 
 def get_most_reasonable_phrase(sentence):
@@ -43,15 +44,17 @@ def get_most_reasonable_phrase(sentence):
     ranked_phrases_with_score = phrase_raker.get_ranked_phrases_with_scores()
     for item in ranked_phrases_with_score:
         score, phrase = item
-        if not detect_puntuation(phrase) and score >= 5:
+        if not detect_puntuation(phrase) and score >= 4:
             return phrase
-        if score < 5:
+        if score < 4:
             return get_most_reasonable_single_word(sentence)
 
 def get_most_reasonable_single_word(sentence):
     single_word_raker.extract_keywords_from_text(sentence)
     ranked_phrases = single_word_raker.get_ranked_phrases()
-    return ranked_phrases[0]
+    for i in range(len(ranked_phrases)):
+        if not not detect_puntuation(ranked_phrases[i]):
+            return ranked_phrases[i]
         
 def detect_puntuation(string):
     return any(p in string for p in punctuation)
