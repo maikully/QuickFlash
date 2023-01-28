@@ -62,7 +62,7 @@ def generate_flashcards_from_json():
             response=json.dumps({"message": "filename is empty"}),
             status=409,
             mimetype='application/json'
-            ))
+            )
     if file and (allowed_file(file.filename) or file.filename == "blob"):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], "temp.json"))
