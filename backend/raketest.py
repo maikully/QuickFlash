@@ -58,7 +58,7 @@ def detect_puntuation(string):
 
 def get_flashcard_text(sentence, keyword):
     if keyword in sentence:
-        return keyword, sentence.replace(keyword, '________', 1), sentence.replace(keyword, "{"+keyword+"}", 1)
+        return keyword, sentence.replace(keyword, '________', 1), sentence.replace(keyword, "{{"+keyword+"}}", 1)
     if keyword.lower() in sentence.lower():
         start = sentence.lower().index(keyword.lower())
         keyword = sentence[start:start+len(keyword)]

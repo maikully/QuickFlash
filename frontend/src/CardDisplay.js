@@ -19,10 +19,13 @@ function CardDisplay (props) {
   const [flipped, setFlipped] = useState(x)
   console.log(flipped)
   return (
-    <div className='App'>
+    <div className='App'  style={{ display: 'flex', flexDirection:"row", justifyContent: "space-between", flexWrap: 'wrap', width:"50vw" }}>
       {props.cards.map((x, idx) => (
         <>
-          <ReactCardFlip isFlipped={flipped[idx]} flipDirection='vertical'>
+          <ReactCardFlip
+            isFlipped={flipped[idx]}
+            flipDirection='vertical'
+          >
             <Button
               onClick={() => {
                 const newFlipped = flipped.map((x, i) => {
@@ -55,7 +58,10 @@ function CardDisplay (props) {
               </div>
 
               <div>
-                <Typography style={{ padding: '10px', color: "black" }} component='div'>
+                <Typography
+                  style={{ padding: '10px', color: 'black' }}
+                  component='div'
+                >
                   {x.question}
                 </Typography>
               </div>
@@ -89,8 +95,21 @@ function CardDisplay (props) {
               >
                 Answer
               </Typography>
-              <Typography style={{ padding: '10px', color:"black" }} component='div'>
-                {x.answered_question}
+              <Typography
+                style={{ padding: '10px', color: 'black' }}
+                component='div'
+              >
+                {x.answered_question.substring(
+                  0,
+                  x.answered_question.indexOf('{')
+                )}
+                <b>
+                  <mark>{x.answer}</mark>
+                </b>
+                {x.answered_question.substring(
+                  x.answered_question.indexOf('}') + 2,
+                  x.answered_question.length
+                )}
               </Typography>
             </Button>
           </ReactCardFlip>
