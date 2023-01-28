@@ -28,37 +28,54 @@ function App () {
   const handleChange = e => {
     setInputValue(e.target.value)
   }
+  const handleReset = () => {
+    setInputValue("")
+    setFlashCards([])
+  }
   return (
     <div className='App'>
       <header className='App-header'>
-        <Typography variant='h4' component='h3' style={{ marginBottom: '5vh' }}>
+        <Typography
+          variant='h4'
+          component='h3'
+          style={{ marginBottom: '5vh', marginTop: '5vh' }}
+        >
           Welcome to QuickFlash!
         </Typography>
-        <div style={{ display: 'flex', flexWrap: 'wrap', width: '50vw' }}>
-          <TextField
-            InputLabelProps={{
-              style: {
-                color: 'black'
-              }
-            }}
-            label='Enter text!'
-            multiline
-            rows={10}
-            variant='outlined'
-            onChange={handleChange}
-            style={{ flexGrow: 1 }}
-          />
-          <div className='break'></div>
-          <Button
-            variant='contained'
-            style={{ backgroundColor: 'black', marginLeft: 'auto' }}
-            onClick={handleSubmit}
-          >
-            Submit
-          </Button>
-        </div>
+        {flashCards.length === 0 && (
+          <div style={{ display: 'flex', flexWrap: 'wrap', width: '50vw' }}>
+            <TextField
+              InputLabelProps={{
+                style: {
+                  color: 'black'
+                }
+              }}
+              label='Enter text!'
+              multiline
+              rows={10}
+              variant='outlined'
+              onChange={handleChange}
+              style={{ flexGrow: 1 }}
+            />
+            <div className='break'></div>
+            <Button
+              variant='contained'
+              style={{ backgroundColor: 'black', marginLeft: 'auto' }}
+              onClick={handleSubmit}
+            >
+              Submit
+            </Button>
+          </div>
+        )}
         <br></br>
-        {flashCards.length > 0 && <CardDisplay cards={flashCards} />}
+        {flashCards.length > 0 && <div><CardDisplay cards={flashCards} />
+            <Button
+              variant='contained'
+              style={{ backgroundColor: 'gray', marginLeft: 'auto', marginBottom:"5vh" }}
+              onClick={handleReset}
+            >
+              Back
+            </Button></div>}
       </header>
     </div>
   )
