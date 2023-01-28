@@ -46,6 +46,7 @@ function App () {
         }
       );
       let res = await response.json();
+      
       res.forEach(e => setFlashCards(flashCards => [...flashCards, e]))
     }
   }

@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_cors import CORS, cross_origin
 from flask import request
+from werkzeug.utils import secure_filename
+import os
 import json
 import raketest
 
@@ -67,7 +69,8 @@ def generate_flashcards_from_json():
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], "temp.json"))
         f = open(UPLOAD_FOLDER + "/" + "temp.json")
-        data = json.load(f)
+        jsoner = json.load(f)
+        print(jsoner)
         response = app.response_class(
             response=json.dumps(jsoner),
             status=200,
