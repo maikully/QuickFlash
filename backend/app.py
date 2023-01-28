@@ -30,6 +30,7 @@ def generate_original_flashcards():
         text_block = request.args.get("text")
     flashcard_list = raketest.make_flashcards(text_block)
     jsoner = jsonify_flashcard_list(flashcard_list)
+    print(jsoner)
     response = app.response_class(
         response=json.dumps(jsoner),
         status=200,
