@@ -9,9 +9,12 @@ app = Flask(__name__)
 def hello_world():
     return "<p>Hello, World!</p>"
 
-@app.route("/generate", methods = ['GET'])
+@app.route("/generate", methods = ['GET', 'POST'])
 def generate_original_flashcards():
-    text_block = request.args.get("text")
+    if request.method == 'POST':
+        text_block = request.form['text']
+    else:
+        text_block = request.args.get("text")
     flashcard_list = raketest.make_flashcards(text_block)
     jsoner = jsonify_flashcard_list(flashcard_list)
     response = app.response_class(
