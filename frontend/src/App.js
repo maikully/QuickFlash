@@ -14,6 +14,7 @@ function App () {
   const url = 'http://127.0.0.1:5000/generate'
   const [inputValue, setInputValue] = useState('')
   const [flashCards, setFlashCards] = useState([])
+  const [mode, setMode] = useState(0)
   const handleSubmit = async e => {
     const data = new FormData()
     data.append('text', inputValue)
@@ -25,32 +26,34 @@ function App () {
     res.forEach(e => setFlashCards(flashCards => [...flashCards, e]))
     console.log(res)
   }
+  const handleBack = async e => {
+    handleReset()
+    setMode(0)
+  }
   const handleChange = e => {
     setInputValue(e.target.value)
   }
   const handleReset = () => {
-    setInputValue("")
+    setInputValue('')
     setFlashCards([])
   }
 
-  const uploadFile = async (e) => {
-    const file = e.target.files[0];
+  const uploadFile = async e => {
+    handleReset()
+    setMode(2)
+    const file = e.target.files[0]
     if (file != null) {
-      const data = new FormData();
-      data.append('file', file);
+      const data = new FormData()
+      data.append('file', file)
 
-      let response = await fetch('http://127.0.0.1:5000/jsonupload',
-        {
-          method: 'post',
-          body: data,
-        }
-      );
-      let res = await response.json();
-      
+      let response = await fetch('http://127.0.0.1:5000/jsonupload', {
+        method: 'post',
+        body: data
+      })
+      let res = await response.json()
       res.forEach(e => setFlashCards(flashCards => [...flashCards, e]))
     }
   }
-
 
   return (
     <div className='App'>
@@ -62,7 +65,23 @@ function App () {
         >
           Welcome to QuickFlash!
         </Typography>
-        {flashCards.length === 0 && (
+        {mode === 0 && (
+          <div>
+            <Button
+              variant='contained'
+              onClick={() => {
+                setMode(1)
+              }}
+            >
+              Create New Cards
+            </Button>{' '}
+            <Button variant='contained' component='label'>
+              Upload File
+              <input type='file' hidden onChange={uploadFile} />
+            </Button>
+          </div>
+        )}
+        {mode === 1 && (
           <div style={{ display: 'flex', flexWrap: 'wrap', width: '50vw' }}>
             <TextField
               InputLabelProps={{
@@ -70,7 +89,7 @@ function App () {
                   color: 'black'
                 }
               }}
-              label='Enter text!'
+              label='Enter information to flashify!'
               multiline
               rows={10}
               variant='outlined'
@@ -88,23 +107,23 @@ function App () {
           </div>
         )}
         <br></br>
-        {flashCards.length > 0 && <div><CardDisplay cards={flashCards} />
+        {mode === 2 && (
+          <div>
+            <CardDisplay cards={flashCards} />
             <Button
               variant='contained'
-              style={{ backgroundColor: 'gray', marginLeft: 'auto', marginBottom:"5vh" }}
-              onClick={handleReset}
+              style={{
+                backgroundColor: 'gray',
+                marginLeft: 'auto',
+                marginBottom: '5vh'
+              }}
+              onClick={handleBack}
             >
               Back
-            </Button></div>}
+            </Button>
+          </div>
+        )}
       </header>
-
-      <form>
-        <input
-          type="file"
-          onChange={uploadFile}>
-        </input>
-      </form>
-
     </div>
   )
 }
