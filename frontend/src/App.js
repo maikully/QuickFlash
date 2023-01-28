@@ -38,20 +38,24 @@ function App () {
     setFlashCards([])
   }
 
-  const uploadFile = async e => {
-    handleReset()
-    setMode(2)
-    const file = e.target.files[0]
+  const uploadFile = async (e) => {
+    const file = e.target.files[0];
     if (file != null) {
-      const data = new FormData()
-      data.append('file', file)
+      const data = new FormData();
+      data.append('file', file);
 
-      let response = await fetch('http://127.0.0.1:5000/jsonupload', {
-        method: 'post',
-        body: data
-      })
-      let res = await response.json()
-      res.forEach(e => setFlashCards(flashCards => [...flashCards, e]))
+      let response = await fetch('http://127.0.0.1:5000/jsonupload',
+        {
+          method: 'post',
+          body: data,
+        }
+      );
+      let res = await response.json();
+      if (response.status != 200){
+        alert(res.message)
+      } else{
+        res.forEach(e => setFlashCards(flashCards => [...flashCards, e]))
+      }
     }
   }
 

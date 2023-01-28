@@ -52,19 +52,21 @@ def jsonify_flashcard_list(flashcard_list):
 def generate_flashcards_from_json():
     if 'file' not in request.files:
         response = app.response_class(
-            response=json.dumps({"message": "file not in request"}),
+            response=json.dumps({"message": "File not in request."}),
             status=409,
             mimetype='application/json'
             )
+        return response
     file = request.files['file']
     # If the user does not select a file, the browser submits an
     # empty file without a filename.
     if file.filename == '':
         response = app.response_class(
-            response=json.dumps({"message": "filename is empty"}),
+            response=json.dumps({"message": "Filename is empty."}),
             status=409,
             mimetype='application/json'
             )
+        return response
     if file and (allowed_file(file.filename) or file.filename == "blob"):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], "temp.json"))
@@ -74,6 +76,13 @@ def generate_flashcards_from_json():
         response = app.response_class(
             response=json.dumps(jsoner),
             status=200,
+            mimetype='application/json'
+            )
+        return response
+    else:
+        response = app.response_class(
+            response=json.dumps({"message": "Unable to process file or file type."}),
+            status=409,
             mimetype='application/json'
             )
         return response
