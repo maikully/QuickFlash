@@ -23,7 +23,7 @@ function CardDisplay (props) {
       {props.cards.map((x, idx) => (
         <>
           <ReactCardFlip isFlipped={flipped[idx]} flipDirection='vertical'>
-            <button
+            <Button
               onClick={() => {
                 const newFlipped = flipped.map((x, i) => {
                   if (i === idx) {
@@ -34,19 +34,34 @@ function CardDisplay (props) {
                 })
                 setFlipped(newFlipped)
               }}
-              style={{ minWidth: 275, maxWidth: 300 }}
+              style={{
+                minWidth: 275,
+                maxWidth: 300,
+                textTransform: 'none',
+                background: 'white',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center'
+              }}
             >
-              <Typography
-                sx={{ fontSize: 14 }}
-                color='text.secondary'
-                gutterBottom
-              >
-                Question
-              </Typography>
-              <Typography component='div'>{x.question}</Typography>
-            </button>
+              <div>
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  color='text.secondary'
+                  gutterBottom
+                >
+                  Question
+                </Typography>
+              </div>
 
-            <button
+              <div>
+                <Typography style={{ padding: '10px', color: "black" }} component='div'>
+                  {x.question}
+                </Typography>
+              </div>
+            </Button>
+
+            <Button
               onClick={() => {
                 const newFlipped = flipped.map((x, i) => {
                   if (i === idx) {
@@ -57,6 +72,15 @@ function CardDisplay (props) {
                 })
                 setFlipped(newFlipped)
               }}
+              style={{
+                minWidth: 275,
+                maxWidth: 300,
+                textTransform: 'none',
+                background: 'white',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center'
+              }}
             >
               <Typography
                 sx={{ fontSize: 14 }}
@@ -65,8 +89,10 @@ function CardDisplay (props) {
               >
                 Answer
               </Typography>
-              <Typography component='div'>{x.answer}</Typography>
-            </button>
+              <Typography style={{ padding: '10px', color:"black" }} component='div'>
+                {x.answered_question}
+              </Typography>
+            </Button>
           </ReactCardFlip>
           <br></br>
         </>

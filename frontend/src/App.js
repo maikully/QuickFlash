@@ -8,6 +8,7 @@ import CardDisplay from './CardDisplay'
 import { styled } from '@mui/material/styles'
 import { Button, TextField, Typography } from '@mui/material'
 import { useState } from 'react'
+import { responsiveProperty } from '@mui/material/styles/cssUtils'
 
 function App () {
   const url = 'http://127.0.0.1:5000/generate'
@@ -22,6 +23,7 @@ function App () {
     })
     let res = await response.json()
     res.forEach(e => setFlashCards(flashCards => [...flashCards, e]))
+    console.log(res)
   }
   const handleChange = e => {
     setInputValue(e.target.value)
