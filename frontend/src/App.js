@@ -45,8 +45,10 @@ function App () {
     }
   }
   const handleBack = async e => {
-    handleReset()
-    setMode(0)
+    if (window.confirm("Your cards go away after going back unless you saved them.\n Are you sure you want to go back?")) {
+      handleReset()
+      setMode(0)
+    }
   }
   const handleChange = e => {
     setInputValue(e.target.value)
@@ -57,8 +59,8 @@ function App () {
   }
 
   const uploadFile = async e => {
-    setMode(1)
     const files = e.target.files
+    setMode(3);
     if (files != null) {
       const data = new FormData()
       for (let i = 0; i < files.length; i++) {
@@ -74,9 +76,8 @@ function App () {
         alert(res.message)
       } else {
         res.forEach(e => setFlashCards(flashCards => [...flashCards, e]))
-        if (res.length > 0) {
-          setMode(2)
-        }
+        setMode(2)
+        
       }
     }
   }
@@ -174,6 +175,23 @@ function App () {
         )}
         <br></br>
         {(mode === 2) && (
+          <div>
+            <CardDisplay cards={flashCards} />
+            <Button
+              variant='contained'
+              style={{
+                backgroundColor: 'gray',
+                marginLeft: 'auto',
+                marginBottom: '5vh'
+              }}
+              onClick={handleBack}
+            >
+              Back
+            </Button>
+          </div>
+        )}
+
+        {(mode === 3) && (
           <div>
             <CardDisplay cards={flashCards} />
             <Button
