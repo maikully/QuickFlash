@@ -160,7 +160,8 @@ function CardDisplay (props) {
                       width: '30px',
                       backgroundColor: 'darksalmon',
                       padding: 0,
-                      border: 'none'
+                      border: 'none',
+                      cursor: 'pointer'
                     }}
                     onClick={() => handleDelete(idx)}
                   >
@@ -172,7 +173,8 @@ function CardDisplay (props) {
                       width: '30px',
                       backgroundColor: 'lightblue',
                       padding: 0,
-                      border: 'none'
+                      border: 'none',
+                      cursor: 'pointer'
                     }}
                     onClick={() => handleEdit(x)}
                   >
@@ -184,6 +186,7 @@ function CardDisplay (props) {
                   flipDirection='vertical'
                 >
                   <Button
+                  className="card"
                     onClick={() => {
                       const newFlipped = flipped.map((x, i) => {
                         if (i === idx) {
@@ -203,7 +206,7 @@ function CardDisplay (props) {
                       display: 'flex',
                       flexDirection: 'column',
                       justifyContent: 'center',
-                      marginBottom: '5vh'
+                      marginBottom: '5vh',
                     }}
                   >
                     <div
@@ -233,6 +236,7 @@ function CardDisplay (props) {
                   </Button>
 
                   <Button
+                  className="card"
                     onClick={() => {
                       const newFlipped = flipped.map((x, i) => {
                         if (i === idx) {

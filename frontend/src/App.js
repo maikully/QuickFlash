@@ -130,7 +130,7 @@ function App () {
       <header className='App-body'>
         {(mode === 0  || mode === 2) && (
           <FadeIn>
-            <div>
+            <div style={{marginBottom:"1vh"}}>
               <Button
                 variant='contained'
                 onClick={() => {

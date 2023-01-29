@@ -12,7 +12,9 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.card:hover {
+  box-shadow: 5px 5px 5px black;
+}
 .App-header {
   background-color: #c7b299;
   min-height: 25vh;
