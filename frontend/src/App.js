@@ -26,6 +26,7 @@ function App () {
   const [inputValue, setInputValue] = useState('')
   const [flashCards, setFlashCards] = useState([])
   const [mode, setMode] = useState(0)
+  const [oldMode, setOldMode] = useState(mode)
   const [aboutActive, setAboutActive] = useState(false)
   const [downloadData, setDownloadData] = useState(false)
   const [logoFlip, setLogoFlip] = useState(false)
@@ -209,6 +210,7 @@ function App () {
               <Button
                 variant='contained'
                 onClick={() => {
+                  setOldMode(mode)
                   setMode(1)
                 }}
               >
@@ -238,6 +240,15 @@ function App () {
                 style={{ flexGrow: 1 }}
               />
               <div className='break'></div>
+              <Button
+                variant='contained'
+                style={{ backgroundColor:"gray", marginRight: 'auto' }}
+                onClick={() => {
+                  setMode(oldMode)
+                }}
+              >
+              Cancel
+              </Button>
               <Button
                 variant='contained'
                 style={{ backgroundColor:"gray", marginLeft: 'auto' }}
