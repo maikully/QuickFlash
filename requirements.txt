@@ -10,7 +10,6 @@ contourpy==1.0.6
 cryptography==39.0.0
 cycler==0.11.0
 cymem==2.0.7
-default_general_domain.en.zip @ https://github.com/kevinlu1248/pyate/raw/master/src/pyate/resources/default_general_domain.en.zip
 e==1.4.5
 en-acl-terms-sm @ https://github.com/kevinlu1248/pyate/releases/download/v0.4.2/en_acl_terms_sm-2.0.4.tar.gz
 en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.5.0/en_core_web_sm-3.5.0-py3-none-any.whl
@@ -41,7 +40,6 @@ Pillow==9.3.0
 plac==0.9.6
 preshed==3.0.8
 pyahocorasick==2.0.0
-pyate==0.5.5
 pycodestyle==2.9.1
 pycparser==2.21
 pydantic==1.10.4

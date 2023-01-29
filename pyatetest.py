@@ -1,3 +1,6 @@
+import sys
+sys.path.insert(1, 'pyate')
+
 from pyate import combo_basic
 
 
