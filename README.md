@@ -6,6 +6,8 @@ Quickly generate flashcards from your notes!
 
 QuickFlash is our innovative flashcard software that allows students to generate flashcards from their notes or textbooks just by simply pasting them in! Using rapid automatic keyword extraction (RAKE) and python automated term extraction (PyATE), we are able to find the most important parts of the notes for review via flashcards. We hope that QuickFlash will enable students to spend more time reviewing their notes and textbooks in a more fun and more efficient manner compared to traditional methods of just studying the text.
 
+Try out the app at https://quickflash.herokuapp.com/!
+
 ## Features
 
 Users can:
