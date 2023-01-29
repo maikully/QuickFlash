@@ -107,7 +107,7 @@ def generate_string(k):
 
 
 def main():
-    app.run(threaded=True, port=5000)
+    app.run(host='0.0.0.0', debug=False, port=os.environ.get('PORT', 80))
 
 
 if __name__ == '__main__':
