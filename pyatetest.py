@@ -1,20 +1,8 @@
 from pyate import combo_basic
-from rake_nltk import Rake
-import nltk
 
 
 punctuation = "!\"#$%&\'()*+,—-./:;<=>?@[\]^_`{|}~’”“"
 punctuation_set = set(i for i in punctuation)
-
-# Uses stopwords for english from NLTK, and all puntuation characters by
-# default
-phrase_raker = Rake(punctuations=punctuation_set, max_length=3)
-single_word_raker = Rake(min_length=1, max_length=1)
-
-# Extraction given the text.
-#phrase_raker.extract_keywords_from_text("While the citric acid cycle is in general highly conserved, there is significant variability in the enzymes found in different taxa[22] (note that the diagrams on this page are specific to the mammalian pathway variant).")
-# print(phrase_raker.get_ranked_phrases())
-# print(phrase_raker.get_ranked_phrases_with_scores())
 
 
 class Flashcard:
