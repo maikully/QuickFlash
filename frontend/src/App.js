@@ -21,10 +21,10 @@ import FadeIn from 'react-fade-in'
 import ReactCardFlip from 'react-card-flip'
 
 function App () {
-  //const urlGenerate = 'http://127.0.0.1:5000/generate'
-  const urlGenerate = 'https://quickflash.herokuapp.com/generate'
-  //const urlUpload = 'http://127.0.0.1:5000/jsonupload'
-  const urlUpload = 'https://quickflash.herokuapp.com/jsonupload'
+  const urlGenerate = 'http://127.0.0.1:5000/generate'
+  //const urlGenerate = 'https://quickflash.herokuapp.com/generate'
+  const urlUpload = 'http://127.0.0.1:5000/jsonupload'
+  //const urlUpload = 'https://quickflash.herokuapp.com/jsonupload'
   const [inputValue, setInputValue] = useState('')
   const [flashCards, setFlashCards] = useState([])
   const [mode, setMode] = useState(0)
@@ -45,7 +45,7 @@ function App () {
     data.append('text', inputValue.trim())
     let response = await fetch(urlGenerate, {
       method: 'post',
-      body: data
+      body: data,
     })
     let res = await response.json()
     if (response.status != 200) {
