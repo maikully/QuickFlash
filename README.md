@@ -39,4 +39,4 @@ flask run
 
 ## Credit
 
-Special thanks to [PyATE](https://github.com/kevinlu1248/pyate) and [RAKE](https://github.com/csurfer/rake-nltk)
+Special thanks to [PyATE](https://github.com/kevinlu1248/pyate) and [RAKE](https://github.com/csurfer/rake-nltk)!
