@@ -58,7 +58,7 @@ function App () {
   const handleBack = async e => {
     if (
       window.confirm(
-        'Your cards go away after going back unless you saved them.\nAre you sure you want to go back?'
+        'Your cards will be deleted.\nAre you sure you want to go back?'
       )
     ) {
       handleReset()
