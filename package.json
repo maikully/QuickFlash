@@ -1,9 +1,0 @@
-{
-  "name": "quickflash",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@mui/icons-material": "^5.11.0",
-    "react-fade-in": "^2.0.1"
-  }
-}
