@@ -28,6 +28,7 @@ def make_flashcards(paragraph:str):
     flashcard_list = list()
     import re
     purged = re.sub(".\[[0-9]*\]", ".", paragraph)
+    purged = purged.replace('\r\n', ' ')
     sentences = purged.split(". ")
     print(sentences)
     for i, sentence in enumerate(sentences):
