@@ -107,7 +107,7 @@ function App () {
             position: 'absolute',
             right: '5%',
             top: '2%',
-            background: 'gray'
+            background: 'gray',
           }}
           onClick={() => setAboutActive(true)}
         >
@@ -174,14 +174,14 @@ function App () {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                marginTop: '10vh',
                 maxWidth: "100vw"
               }}
             >
               <img
                 src='QuickFlashLogo.png'
                 alt='QuickFlashLogo'
-                width='500px'
+                width= "100%"
+                height= "auto"
               ></img>
             </Button>
 
@@ -195,13 +195,15 @@ function App () {
                 background: '#c7b299',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                maxWidth: "100vw"
               }}
             >
               <img
                 src='QuickFlashLogo2.png'
                 alt='QuickFlashLogo'
-                width='500px'
+                width= "100%"
+                height= "auto"
               ></img>
             </Button>
           </ReactCardFlip>
