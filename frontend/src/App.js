@@ -19,6 +19,7 @@ function App () {
   const [mode, setMode] = useState(0)
   const [downloadData, setDownloadData] = useState(false)
   const [logoFlip, setLogoFlip] = useState(false)
+  const [dummy, setDummy] = useState(0)
 
   function saveData () {
     const json = JSON.stringify(flashCards)
@@ -56,6 +57,7 @@ function App () {
   }
 
   const uploadFile = async e => {
+    setMode(1)
     const files = e.target.files
     if (files != null) {
       const data = new FormData()
@@ -113,7 +115,6 @@ function App () {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                marginBottom: '5vh'
               }}
             >
               <img
@@ -126,7 +127,7 @@ function App () {
         </FadeIn>
       </header>
       <header className='App-body'>
-        {mode === 0 && (
+        {(mode === 0  || mode === 2) && (
           <FadeIn>
             <div>
               <Button
@@ -172,7 +173,7 @@ function App () {
           </FadeIn>
         )}
         <br></br>
-        {mode === 2 && (
+        {(mode === 2) && (
           <div>
             <CardDisplay cards={flashCards} />
             <Button

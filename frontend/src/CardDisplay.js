@@ -15,6 +15,7 @@ import {
 import { useState } from 'react'
 import ReactCardFlip from 'react-card-flip'
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline'
+import ClearIcon from '@mui/icons-material/Clear'
 import EditIcon from '@mui/icons-material/Edit'
 import { Edit } from '@mui/icons-material'
 import EditDisplay from './EditDisplay'
@@ -41,6 +42,17 @@ function CardDisplay (props) {
     newCards = newCards.concat(cards.slice(idx + 1, cards.length))
     setCards(newCards)
     setEditing(false)
+  }
+  const handleAdd = card => {
+    setEditing(true)
+    let newCard = {answer: "", question: "", original: "", answered_question: ""}
+    let newCards = cards
+    newCards.push(newCard)
+    setEditingCard(newCard) 
+    let newFlips = flipped
+    newFlips.push(false)
+    setFlipped(newFlips)
+
   }
   const showQuestions = () => {
     setFlipped(props.cards.map(x => false))
@@ -146,13 +158,13 @@ function CardDisplay (props) {
                   }}
                   onClick={() => handleDelete(idx)}
                 >
-                  <RemoveCircleOutlineIcon></RemoveCircleOutlineIcon>
+                  <ClearIcon></ClearIcon>
                 </button>
                 <button
                   style={{
                     height: '30px',
                     width: '30px',
-                    backgroundColor: 'darksalmon',
+                    backgroundColor: 'lightblue',
                     padding: 0,
                     border: 'none'
                   }}
@@ -262,10 +274,19 @@ function CardDisplay (props) {
               <br></br>
             </div>
           ))}
+          <div className='break'></div>
+          <Button
+            style={{
+              marginBottom: '2vh'
+            }}
+            variant='contained'
+            onClick={handleAdd}
+          >
+            Add Card
+          </Button>
         </>
       )}
-      {editing && <EditDisplay card={editingCard} onEdit={handleEdited}/>
-      }
+      {editing && <EditDisplay card={editingCard} onEdit={handleEdited} />}
     </div>
   )
 }
