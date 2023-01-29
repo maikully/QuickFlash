@@ -39,6 +39,6 @@ flask run
 - [ ] add more accessibility features, e.g. screen-reading and printing capabilities
 - [ ] add integration with existing online study software, e.g. Quizlet, Anki
 
-## Credit
+## Credits
 
 Special thanks to [PyATE](https://github.com/kevinlu1248/pyate) and [RAKE](https://github.com/csurfer/rake-nltk)!
