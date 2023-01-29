@@ -21,8 +21,10 @@ import FadeIn from 'react-fade-in'
 import ReactCardFlip from 'react-card-flip'
 
 function App () {
-  //const url = 'http://localhost:5000/generate'
-  const url = 'https://quickflash.herokuapp.com/generate'
+  //const urlGenerate = 'http://localhost:5000/generate'
+  const urlGenerate = 'https://quickflash.herokuapp.com/generate'
+  //const urlUpload = 'http://localhost:5000/jsonupload'
+  const urlUpload = 'https://quickflash.herokuapp.com/jsonupload'
   const [inputValue, setInputValue] = useState('')
   const [flashCards, setFlashCards] = useState([])
   const [mode, setMode] = useState(0)
@@ -41,7 +43,7 @@ function App () {
   const handleSubmit = async e => {
     const data = new FormData()
     data.append('text', inputValue)
-    let response = await fetch(url, {
+    let response = await fetch(urlGenerate, {
       method: 'post',
       body: data
     })
@@ -58,7 +60,7 @@ function App () {
   const handleBack = async e => {
     if (
       window.confirm(
-        'Your cards will be deleted.\nAre you sure you want to go back?'
+        'Your cards will be deleted. Are you sure you want to go back?'
       )
     ) {
       handleReset()
@@ -82,7 +84,7 @@ function App () {
         data.append('files', files[i])
       }
 
-      let response = await fetch('http://127.0.0.1:5000/jsonupload', {
+      let response = await fetch(urlUpload, {
         method: 'post',
         body: data
       })
@@ -171,7 +173,9 @@ function App () {
                 background: '#c7b299',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                marginTop: '10vh',
+                maxWidth: "100vw"
               }}
             >
               <img
