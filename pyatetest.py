@@ -15,6 +15,7 @@ class Flashcard:
 
 def make_flashcards(paragraph: str):
     flashcard_list = list()
+    print("hello")
     import re
     purged = re.sub(".\[[0-9]*\]", ".", paragraph)
     purged = purged.replace('\r\n', ' ')
