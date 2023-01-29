@@ -21,6 +21,7 @@ import FadeIn from 'react-fade-in'
 import ReactCardFlip from 'react-card-flip'
 
 function App () {
+  //const url = 'http://localhost:5000/generate'
   const url = 'https://quickflash.herokuapp.com/generate'
   const [inputValue, setInputValue] = useState('')
   const [flashCards, setFlashCards] = useState([])
