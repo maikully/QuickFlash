@@ -5,6 +5,9 @@ from werkzeug.utils import secure_filename
 import os
 import json
 import raketest
+import pyatetest
+
+LIBSWITCH = 0
 
 app = Flask(__name__, static_folder='./frontend/build', static_url_path='/')
 cors = CORS(app)
@@ -33,7 +36,11 @@ def generate_original_flashcards():
         text_block = request.form['text']
     else:
         text_block = request.args.get("text")
-    flashcard_list = raketest.make_flashcards(text_block)
+    # 0 for pyate, 1 for rake
+    flashcard_list = pyatetest.make_flashcards(text_block)
+    if LIBSWITCH:
+        flashcard_list = raketest.make_flashcards(text_block)
+
     jsoner = jsonify_flashcard_list(flashcard_list)
     print(jsoner)
     response = app.response_class(
