@@ -1,6 +1,6 @@
 from rake_nltk import Rake
 import nltk
-
+nltk.data.path.append('./nltk_data/')
 nltk.download('stopwords')
 nltk.download('punkt')
 punctuation = "!\"#$%&\'()*+,—-./:;<=>?@[\]^_`{|}~’”“"
