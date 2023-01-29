@@ -6,6 +6,7 @@ import '@fontsource/roboto/700.css'
 import { Button, Typography, TextField } from '@mui/material'
 import { useState } from 'react'
 import ReactCardFlip from 'react-card-flip'
+import FadeIn from 'react-fade-in'
 
 function EditDisplay (props) {
   const [original, setOriginal] = useState(props.card.original)
@@ -52,108 +53,111 @@ function EditDisplay (props) {
           width: '40vw'
         }}
       >
-        <ReactCardFlip isFlipped={false} flipDirection='vertical'>
-          <div
-            style={{
-              minWidth: 275,
-              maxWidth: 300,
-              minHeight: 300,
-              textTransform: 'none',
-              background: 'white',
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '5vh',
-              borderRadius: '5px'
-            }}
-          >
+        <FadeIn>
+          <ReactCardFlip isFlipped={false} flipDirection='vertical'>
             <div
               style={{
+                minWidth: 275,
+                maxWidth: 300,
+                minHeight: 300,
+                textTransform: 'none',
+                background: 'white',
                 display: 'flex',
                 flexDirection: 'row',
-                justifyContent: 'end'
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '5vh',
+                borderRadius: '5px'
               }}
             >
-              <Typography
-                sx={{ fontSize: 14 }}
-                color='text.secondary'
-                gutterBottom
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'end'
+                }}
               >
-                <TextField
-                  InputLabelProps={{
-                    style: {
-                      color: 'black'
-                    }
-                  }}
-                  label='Edit Question'
-                  value={original}
-                  multiline
-                  rows={10}
-                  variant='outlined'
-                  onChange={e => setOriginal(e.target.value)}
-                  style={{ flexGrow: 1 }}
-                />
-              </Typography>
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  color='text.secondary'
+                  gutterBottom
+                >
+                  <TextField
+                    InputLabelProps={{
+                      style: {
+                        color: 'black'
+                      }
+                    }}
+                    label='Edit Question'
+                    value={original}
+                    multiline
+                    rows={10}
+                    variant='outlined'
+                    onChange={e => setOriginal(e.target.value)}
+                    style={{ flexGrow: 1 }}
+                  />
+                </Typography>
+              </div>
             </div>
-          </div>
 
-          <div></div>
-        </ReactCardFlip>
-
-        <ReactCardFlip isFlipped={false} flipDirection='vertical'>
-          <div
-            style={{
-              minWidth: 275,
-              maxWidth: 300,
-              minHeight: 300,
-              textTransform: 'none',
-              background: 'white',
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '5vh',
-              borderRadius: '5px'
-            }}
-          >
+            <div></div>
+          </ReactCardFlip>
+        </FadeIn>
+        <FadeIn>
+          <ReactCardFlip isFlipped={false} flipDirection='vertical'>
             <div
               style={{
+                minWidth: 275,
+                maxWidth: 300,
+                minHeight: 300,
+                textTransform: 'none',
+                background: 'white',
                 display: 'flex',
                 flexDirection: 'row',
-                justifyContent: 'end'
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '5vh',
+                borderRadius: '5px'
               }}
             >
-              <Typography
-                sx={{ fontSize: 14 }}
-                color='text.secondary'
-                gutterBottom
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'end'
+                }}
               >
-                <TextField
-                  InputLabelProps={{
-                    style: {
-                      color: 'black'
-                    }
-                  }}
-                  label='Edit Answer'
-                  value={answer}
-                  multiline
-                  rows={10}
-                  variant='outlined'
-                  onChange={e => setAnswer(e.target.value)}
-                  style={{ flexGrow: 1 }}
-                />
-              </Typography>
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  color='text.secondary'
+                  gutterBottom
+                >
+                  <TextField
+                    InputLabelProps={{
+                      style: {
+                        color: 'black'
+                      }
+                    }}
+                    label='Edit Answer'
+                    value={answer}
+                    multiline
+                    rows={10}
+                    variant='outlined'
+                    onChange={e => setAnswer(e.target.value)}
+                    style={{ flexGrow: 1 }}
+                  />
+                </Typography>
+              </div>
             </div>
-          </div>
 
-          <div></div>
-        </ReactCardFlip>
+            <div></div>
+          </ReactCardFlip>
+        </FadeIn>
       </div>
       <Button
         variant='contained'
         style={{
-          backgroundColor: 'black',
+          backgroundColor: 'gray',
           marginLeft: 'auto',
           marginBottom: '2vh'
         }}

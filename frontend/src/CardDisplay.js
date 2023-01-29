@@ -27,7 +27,7 @@ function CardDisplay (props) {
   const [editing, setEditing] = useState(false)
   const [editingCard, setEditingCard] = useState()
   const handleDelete = idx => {
-    if (window.confirm('Are you sure that you want to delete this card?')) {
+    if (window.confirm('Are you sure you want to delete this card?')) {
       let newFlipped = flipped.filter((x, i) => i !== idx)
       setFlipped(newFlipped)
       setCards(cards.filter((x, i) => i !== idx))
