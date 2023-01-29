@@ -181,6 +181,7 @@ function App () {
                 src='QuickFlashLogo.png'
                 alt='QuickFlashLogo'
                 width= "100%"
+                style={{maxWidth:"500px"}}
                 height= "auto"
               ></img>
             </Button>
@@ -203,6 +204,7 @@ function App () {
                 src='QuickFlashLogo2.png'
                 alt='QuickFlashLogo'
                 width= "100%"
+                style={{maxWidth:"500px"}}
                 height= "auto"
               ></img>
             </Button>
