@@ -39,17 +39,28 @@ def make_flashcards(paragraph: str):
             sentence = sentence+"."
         if (sentence):
             keyword = None
+            # check unused keywords
             for word in unused_keywords:
                 if word[0] in sentence:
                     keyword = word[0]
                     unused_keywords.remove(word)
                     break
+            # then just check keywords
             if keyword == None:
                 for word in keywords:
                     if word[0] in sentence:
                         keyword = word[0]
                         break
-            
+            # then take the longest proper noun
+            if keyword == None:
+                proper_noun_list = [x for x in sentence.split(" ") if x[0].isupper()]
+                if len(proper_noun_list) == 1:
+                    keyword = proper_noun_list[0]
+                elif len(proper_noun_list) > 1:
+                    keyword = max(proper_noun_list, key=len)
+            # then take the longest word
+            if keyword == None:
+                keyword = max(sentence.split(" "), key=len)
             keyword, flashcard_text, answered_question = get_flashcard_text(
                 sentence, keyword)
             flashcard = Flashcard(
