@@ -19,6 +19,7 @@ import ClearIcon from '@mui/icons-material/Clear'
 import EditIcon from '@mui/icons-material/Edit'
 import { Edit } from '@mui/icons-material'
 import EditDisplay from './EditDisplay'
+import FadeIn from 'react-fade-in/lib/FadeIn'
 function CardDisplay (props) {
   let x = props.cards.map(x => false)
   const [flipped, setFlipped] = useState(x)
@@ -26,13 +27,11 @@ function CardDisplay (props) {
   const [editing, setEditing] = useState(false)
   const [editingCard, setEditingCard] = useState()
   const handleDelete = idx => {
-
-    if (window.confirm("Are you sure that you want to delete this card?")) {
+    if (window.confirm('Are you sure that you want to delete this card?')) {
       let newFlipped = flipped.filter((x, i) => i !== idx)
       setFlipped(newFlipped)
       setCards(cards.filter((x, i) => i !== idx))
     }
-
   }
   const handleEdit = card => {
     setEditing(true)
@@ -49,14 +48,18 @@ function CardDisplay (props) {
   }
   const handleAdd = card => {
     setEditing(true)
-    let newCard = {answer: "", question: "", original: "", answered_question: ""}
+    let newCard = {
+      answer: '',
+      question: '',
+      original: '',
+      answered_question: ''
+    }
     let newCards = cards
     newCards.push(newCard)
-    setEditingCard(newCard) 
+    setEditingCard(newCard)
     let newFlips = flipped
     newFlips.push(false)
     setFlipped(newFlips)
-
   }
   const showQuestions = () => {
     setFlipped(props.cards.map(x => false))
@@ -97,115 +100,159 @@ function CardDisplay (props) {
     >
       {!editing && (
         <>
-          <div>
-            <Button
-              variant='contained'
-              style={{
-                backgroundColor: 'gray',
-                marginLeft: 'auto',
-                marginBottom: '5vh'
-              }}
-              onClick={showQuestions}
-            >
-              Show Questions
-            </Button>{' '}
-            <Button
-              variant='contained'
-              style={{
-                backgroundColor: 'gray',
-                marginLeft: 'auto',
-                marginBottom: '5vh'
-              }}
-              onClick={showAnswers}
-            >
-              Show Answers
-            </Button>{' '}
-            <Button
-              variant='contained'
-              style={{
-                backgroundColor: 'gray',
-                marginLeft: 'auto',
-                marginBottom: '5vh'
-              }}
-              onClick={downloadFile}
-            >
-              Download Cards
-            </Button>
-            <br></br>
-          </div>
+          <FadeIn>
+            <div>
+              <Button
+                variant='contained'
+                style={{
+                  backgroundColor: 'gray',
+                  marginBottom: '5vh'
+                }}
+                onClick={showQuestions}
+              >
+                Show Questions
+              </Button>{' '}
+              <Button
+                variant='contained'
+                style={{
+                  backgroundColor: 'gray',
+                  marginBottom: '5vh'
+                }}
+                onClick={showAnswers}
+              >
+                Show Answers
+              </Button>{' '}
+              <Button
+                variant='contained'
+                style={{
+                  backgroundColor: 'gray',
+                  marginBottom: '5vh'
+                }}
+                onClick={downloadFile}
+              >
+                Download Cards
+              </Button>
+            </div>
+          </FadeIn>
 
           <div className='break'></div>
 
           {cards.map((x, idx) => (
-            <div
-              key={idx}
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'center'
-              }}
-            >
+            <FadeIn>
               <div
+                key={idx}
                 style={{
-                  flexDirection: 'column',
-                  alignItems: 'flex-start',
-                  width: '30px'
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'center'
                 }}
               >
-                <button
+                <div
                   style={{
-                    height: '30px',
-                    width: '30px',
-                    backgroundColor: 'darksalmon',
-                    padding: 0,
-                    border: 'none'
-                  }}
-                  onClick={() => handleDelete(idx)}
-                >
-                  <ClearIcon></ClearIcon>
-                </button>
-                <button
-                  style={{
-                    height: '30px',
-                    width: '30px',
-                    backgroundColor: 'lightblue',
-                    padding: 0,
-                    border: 'none'
-                  }}
-                  onClick={() => handleEdit(x)}
-                >
-                  <EditIcon></EditIcon>
-                </button>
-              </div>
-              <ReactCardFlip isFlipped={flipped[idx]} flipDirection='vertical'>
-                <Button
-                  onClick={() => {
-                    const newFlipped = flipped.map((x, i) => {
-                      if (i === idx) {
-                        return true
-                      } else {
-                        return x
-                      }
-                    })
-                    setFlipped(newFlipped)
-                  }}
-                  style={{
-                    minWidth: 275,
-                    maxWidth: 300,
-                    minHeight: 300,
-                    textTransform: 'none',
-                    background: 'white',
-                    display: 'flex',
                     flexDirection: 'column',
-                    justifyContent: 'center',
-                    marginBottom: '5vh'
+                    alignItems: 'flex-start',
+                    width: '30px'
                   }}
                 >
-                  <div
+                  <button
                     style={{
+                      height: '30px',
+                      width: '30px',
+                      backgroundColor: 'darksalmon',
+                      padding: 0,
+                      border: 'none'
+                    }}
+                    onClick={() => handleDelete(idx)}
+                  >
+                    <ClearIcon></ClearIcon>
+                  </button>
+                  <button
+                    style={{
+                      height: '30px',
+                      width: '30px',
+                      backgroundColor: 'lightblue',
+                      padding: 0,
+                      border: 'none'
+                    }}
+                    onClick={() => handleEdit(x)}
+                  >
+                    <EditIcon></EditIcon>
+                  </button>
+                </div>
+                <ReactCardFlip
+                  isFlipped={flipped[idx]}
+                  flipDirection='vertical'
+                >
+                  <Button
+                    onClick={() => {
+                      const newFlipped = flipped.map((x, i) => {
+                        if (i === idx) {
+                          return true
+                        } else {
+                          return x
+                        }
+                      })
+                      setFlipped(newFlipped)
+                    }}
+                    style={{
+                      minWidth: 275,
+                      maxWidth: 300,
+                      minHeight: 300,
+                      textTransform: 'none',
+                      background: 'white',
                       display: 'flex',
-                      flexDirection: 'row',
-                      justifyContent: 'end'
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      marginBottom: '5vh'
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'end'
+                      }}
+                    >
+                      <Typography
+                        sx={{ fontSize: 14 }}
+                        color='text.secondary'
+                        gutterBottom
+                      >
+                        Question{' '}
+                      </Typography>
+                    </div>
+
+                    <div>
+                      <Typography
+                        style={{ padding: '10px', color: 'black' }}
+                        component='div'
+                      >
+                        {x.question}
+                      </Typography>
+                    </div>
+                  </Button>
+
+                  <Button
+                    onClick={() => {
+                      const newFlipped = flipped.map((x, i) => {
+                        if (i === idx) {
+                          return false
+                        } else {
+                          return x
+                        }
+                      })
+                      setFlipped(newFlipped)
+                    }}
+                    style={{
+                      minWidth: 275,
+                      maxWidth: 300,
+                      minHeight: 300,
+                      textTransform: 'none',
+                      background: 'white',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      marginBottom: '5vh'
                     }}
                   >
                     <Typography
@@ -213,70 +260,29 @@ function CardDisplay (props) {
                       color='text.secondary'
                       gutterBottom
                     >
-                      Question{' '}
+                      Answer
                     </Typography>
-                  </div>
-
-                  <div>
                     <Typography
                       style={{ padding: '10px', color: 'black' }}
                       component='div'
                     >
-                      {x.question}
+                      {x.answered_question.substring(
+                        0,
+                        x.answered_question.indexOf('{{')
+                      )}
+                      <b>
+                        <mark>{x.answer}</mark>
+                      </b>
+                      {x.answered_question.substring(
+                        x.answered_question.indexOf('}}') + 2,
+                        x.answered_question.length
+                      )}
                     </Typography>
-                  </div>
-                </Button>
-
-                <Button
-                  onClick={() => {
-                    const newFlipped = flipped.map((x, i) => {
-                      if (i === idx) {
-                        return false
-                      } else {
-                        return x
-                      }
-                    })
-                    setFlipped(newFlipped)
-                  }}
-                  style={{
-                    minWidth: 275,
-                    maxWidth: 300,
-                    minHeight: 300,
-                    textTransform: 'none',
-                    background: 'white',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    marginBottom: '5vh'
-                  }}
-                >
-                  <Typography
-                    sx={{ fontSize: 14 }}
-                    color='text.secondary'
-                    gutterBottom
-                  >
-                    Answer
-                  </Typography>
-                  <Typography
-                    style={{ padding: '10px', color: 'black' }}
-                    component='div'
-                  >
-                    {x.answered_question.substring(
-                      0,
-                      x.answered_question.indexOf('{{')
-                    )}
-                    <b>
-                      <mark>{x.answer}</mark>
-                    </b>
-                    {x.answered_question.substring(
-                      x.answered_question.indexOf('}}') + 2,
-                      x.answered_question.length
-                    )}
-                  </Typography>
-                </Button>
-              </ReactCardFlip>
-              <br></br>
-            </div>
+                  </Button>
+                </ReactCardFlip>
+                <br></br>
+              </div>
+            </FadeIn>
           ))}
           <div className='break'></div>
           <Button
