@@ -77,7 +77,8 @@ def generate_flashcards_from_json():
                         mimetype='application/json'
                         )
                     return response
-            
+            f.close()
+            os.remove(UPLOAD_FOLDER + "/" + filename)            
         response = app.response_class(
             response=json.dumps(net_jsons),
             status=200,
