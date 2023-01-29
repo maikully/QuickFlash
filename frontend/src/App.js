@@ -16,6 +16,10 @@ import {
 import { useState } from 'react'
 import FadeIn from 'react-fade-in'
 import ReactCardFlip from 'react-card-flip'
+import ReactGA from "react-ga4";
+
+ReactGA.initialize('G-HSDVV2HY79')
+ReactGA.send('pageview')
 
 function App () {
   const isLocal = false
