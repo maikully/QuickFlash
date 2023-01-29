@@ -61,35 +61,7 @@ def make_flashcards(paragraph: str):
     return (flashcard_list)
 
 
-def get_most_reasonable_phrase(sentence):
-    phrase_raker.extract_keywords_from_text(sentence)
-    ranked_phrases_with_score = phrase_raker.get_ranked_phrases_with_scores()
-    for item in ranked_phrases_with_score:
-        score, phrase = item
-        if not detect_puntuation(phrase) and score >= 4 and phrase != None:
-            return phrase
-        if score < 4:
-            short_output = get_most_reasonable_single_word(sentence)
-            if short_output == None:
-                break
-
-    split = sentence.split(" ")
-    max_len = 0
-    for i in range(len(split)):
-        if len(split[i]) > len(split[max_len]):
-            max_len = i
-    return split[i]
-
-
-def get_most_reasonable_single_word(sentence):
-    single_word_raker.extract_keywords_from_text(sentence)
-    ranked_phrases = single_word_raker.get_ranked_phrases()
-    for i in range(len(ranked_phrases)):
-        if not not detect_puntuation(ranked_phrases[i]):
-            return ranked_phrases[i]
-
-
-def detect_puntuation(string):
+def detect_punctuation(string):
     return any(p in string for p in punctuation)
 
 

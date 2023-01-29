@@ -3,21 +3,14 @@ import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
-import { styled } from '@mui/material/styles'
 import {
   Button,
-  TextField,
   Typography,
-  Card,
-  CardContent,
-  CardActions
 } from '@mui/material'
 import { useState } from 'react'
 import ReactCardFlip from 'react-card-flip'
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline'
 import ClearIcon from '@mui/icons-material/Clear'
 import EditIcon from '@mui/icons-material/Edit'
-import { Edit } from '@mui/icons-material'
 import EditDisplay from './EditDisplay'
 import FadeIn from 'react-fade-in/lib/FadeIn'
 function CardDisplay (props) {
@@ -186,7 +179,7 @@ function CardDisplay (props) {
                   flipDirection='vertical'
                 >
                   <Button
-                  className="card"
+                    className='card'
                     onClick={() => {
                       const newFlipped = flipped.map((x, i) => {
                         if (i === idx) {
@@ -206,7 +199,7 @@ function CardDisplay (props) {
                       display: 'flex',
                       flexDirection: 'column',
                       justifyContent: 'center',
-                      marginBottom: '5vh',
+                      marginBottom: '5vh'
                     }}
                   >
                     <div
@@ -236,7 +229,7 @@ function CardDisplay (props) {
                   </Button>
 
                   <Button
-                  className="card"
+                    className='card'
                     onClick={() => {
                       const newFlipped = flipped.map((x, i) => {
                         if (i === idx) {

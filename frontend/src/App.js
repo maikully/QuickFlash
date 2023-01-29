@@ -1,11 +1,9 @@
-import logo from './logo.svg'
 import './App.css'
 import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import CardDisplay from './CardDisplay'
-import { styled } from '@mui/material/styles'
 import {
   Button,
   TextField,
@@ -16,14 +14,17 @@ import {
   Box
 } from '@mui/material'
 import { useState } from 'react'
-import { responsiveProperty } from '@mui/material/styles/cssUtils'
 import FadeIn from 'react-fade-in'
 import ReactCardFlip from 'react-card-flip'
 
 function App () {
   const isLocal = false
-  const urlGenerate = isLocal ? 'http://127.0.0.1:5000/generate' : 'https://quickflash.herokuapp.com/generate'
-  const urlUpload = isLocal ? 'http://127.0.0.1:5000/jsonupload' : 'https://quickflash.herokuapp.com/jsonupload'
+  const urlGenerate = isLocal
+    ? 'http://127.0.0.1:5000/generate'
+    : 'https://quickflash.herokuapp.com/generate'
+  const urlUpload = isLocal
+    ? 'http://127.0.0.1:5000/jsonupload'
+    : 'https://quickflash.herokuapp.com/jsonupload'
   const [inputValue, setInputValue] = useState('')
   const [flashCards, setFlashCards] = useState([])
   const [mode, setMode] = useState(0)
@@ -44,7 +45,7 @@ function App () {
     data.append('text', inputValue.trim())
     let response = await fetch(urlGenerate, {
       method: 'post',
-      body: data,
+      body: data
     })
     let res = await response.json()
     if (response.status != 200) {
@@ -107,7 +108,7 @@ function App () {
             position: 'absolute',
             right: '5%',
             top: '2%',
-            background: 'gray',
+            background: 'gray'
           }}
           onClick={() => setAboutActive(true)}
         >
@@ -174,15 +175,15 @@ function App () {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                maxWidth: "100vw"
+                maxWidth: '100vw'
               }}
             >
               <img
                 src='QuickFlashLogo.png'
                 alt='QuickFlashLogo'
-                width= "100%"
-                style={{maxWidth:"500px"}}
-                height= "auto"
+                width='100%'
+                style={{ maxWidth: '500px' }}
+                height='auto'
               ></img>
             </Button>
 
@@ -197,15 +198,15 @@ function App () {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                maxWidth: "100vw"
+                maxWidth: '100vw'
               }}
             >
               <img
                 src='QuickFlashLogo2.png'
                 alt='QuickFlashLogo'
-                width= "100%"
-                style={{maxWidth:"500px"}}
-                height= "auto"
+                width='100%'
+                style={{ maxWidth: '500px' }}
+                height='auto'
               ></img>
             </Button>
           </ReactCardFlip>
@@ -226,7 +227,13 @@ function App () {
               </Button>{' '}
               <Button variant='contained' component='label'>
                 Upload Card Files
-                <input type='file' hidden multiple accept=".json" onChange={uploadFile} />
+                <input
+                  type='file'
+                  hidden
+                  multiple
+                  accept='.json'
+                  onChange={uploadFile}
+                />
               </Button>
             </div>
           </FadeIn>
@@ -250,16 +257,16 @@ function App () {
               <div className='break'></div>
               <Button
                 variant='contained'
-                style={{ backgroundColor:"gray", marginRight: 'auto' }}
+                style={{ backgroundColor: 'gray', marginRight: 'auto' }}
                 onClick={() => {
                   setMode(oldMode)
                 }}
               >
-              Cancel
+                Cancel
               </Button>
               <Button
                 variant='contained'
-                style={{ backgroundColor:"gray", marginLeft: 'auto' }}
+                style={{ backgroundColor: 'gray', marginLeft: 'auto' }}
                 onClick={handleSubmit}
               >
                 Submit
