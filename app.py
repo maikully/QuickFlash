@@ -4,7 +4,7 @@ from flask import request
 from werkzeug.utils import secure_filename
 import os
 import json
-import pyatetest
+import raketest
 
 app = Flask(__name__, static_folder='./frontend/build', static_url_path='/')
 cors = CORS(app)
@@ -33,7 +33,7 @@ def generate_original_flashcards():
         text_block = request.form['text']
     else:
         text_block = request.args.get("text")
-    flashcard_list = pyatetest.make_flashcards(text_block)
+    flashcard_list = raketest.make_flashcards(text_block)
     jsoner = jsonify_flashcard_list(flashcard_list)
     print(jsoner)
     response = app.response_class(
