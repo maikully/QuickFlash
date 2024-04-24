@@ -34,7 +34,7 @@ murmurhash==1.0.9
 nltk==3.8.1
 numpy==1.23.4
 packaging==21.3
-pandas==1.5.1
+pandas==2.2.2
 pathlib==1.0.1
 pathy==0.10.1
 Pillow==9.3.0
